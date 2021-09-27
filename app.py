@@ -17,6 +17,13 @@ def index():
         if msg is None:
             status=2
             return render_template("index.html", status=status)
+        realflag=False
+        s="https://"
+        realflag= s in msg
+        if realflag:
+            status=2
+            realflag=False
+            return render_template("index.html", status=status)
         db.execute("INSERT INTO operation (msg) VALUES (:msg)",
                 {"msg": msg})
         db.commit()
