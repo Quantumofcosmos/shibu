@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 app = Flask(__name__)
-
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 recent = ["", "", "", "", ""]
