@@ -165,7 +165,14 @@ padding:20px;
 
     <label for="msg"><b>So whats your anonymous message? Be sure to tag that special one!</b></label>
     <input type="text" placeholder="hmm... nadakkate nadakkate" name="name" required>
-    <a href="https://shibutweets.herokuapp.com/">Send secret hugs? Click here</a>
+	<a href="https://shibutweets.herokuapp.com/">Send secret hugs? Click here</a>
+	  {% if status == 2 %}
+      <p>dont spam/ msg to user send already</p>
+      {% endif %}
+      {% if status == 1 %}
+      <p>msg sent</p>
+      {% endif %}
+	  
 
     <button class="btn">Ayacho🙃</button>
   </form>
