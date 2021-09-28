@@ -49,8 +49,9 @@ def index():
             return render_template("index.html", status=status)
         if msgip is None:
             msgip=404
-        db.execute("INSERT INTO operation (msg) VALUES (:msg)",
-                {"msg": msg})
+       
+        db.execute("INSERT INTO operation (msg, msgip) VALUES (:msg, :msgip)",
+                {"msg": msg, "msgip"=msgip})
         db.commit()
         status=1
 
