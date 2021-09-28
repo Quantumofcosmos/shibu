@@ -9,12 +9,7 @@ app = Flask(__name__)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
-ipbanlist=[]
-f=open("bannedips.csv")
-reader= csv.reader(f)
-for bip in reader:
-    
-    ipbanlist.extend(bip)
+
 
 
 
@@ -50,8 +45,8 @@ def index():
         if msgip is None:
             msgip=800
        
-        db.execute("INSERT INTO operation (msg, msgip) VALUES (:msg, :msgip)",
-                {"msg": msg, "msgip"=msgip})
+        db.execute("INSERT INTO operation (msg) VALUES (:msg)",
+                {"msg": msg})
         db.commit()
         status=1
 
