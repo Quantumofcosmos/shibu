@@ -14,6 +14,12 @@ def index():
     status=0
     if request.method == "POST":
         msg= request.form.get("name")
+        
+        if "https://" in msg:
+            status=2
+            return render_template("index.html", status=status)
+            
+        
         if msg is None:
             status=2
             return render_template("index.html", status=status)
