@@ -23,9 +23,7 @@ for bip in reader:
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    msgip = request.remote_addr
-    if msgip in ipbanlist:
-      realflag=True
+    
     status=0
     if request.method == "POST":
         msg= request.form.get("name")
@@ -35,6 +33,9 @@ def index():
         realflag=False
         s="https://"
         realflag= s in msg
+        msgip = request.remote_addr
+        if msgip in ipbanlist:
+            realflag=True
         
             
       
