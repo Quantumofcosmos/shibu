@@ -178,6 +178,9 @@ padding:20px;
       {% if status == 1 %}
       <p>msg sent</p>
       {% endif %}
+	{% if status == 5 %}
+      <p>Quota for tagged tweets have been reached. Try again 30min </p>
+      {% endif %}
 	  
 
     <button class="btn">Ayacho🙃</button>
