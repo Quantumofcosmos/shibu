@@ -33,9 +33,13 @@ def index():
         realflag=False
         s="https://"
         realflag= s in msg
-        msgip = request.remote_addr
+        
+
+        msgip = request.environ['REMOTE_ADDR']
         if msgip in ipbanlist:
             realflag=True
+            
+        
         
             
       
@@ -43,6 +47,8 @@ def index():
             status=2
             realflag=False
             return render_template("index.html", status=status)
+        if msgip is None:
+            msgip=404
         db.execute("INSERT INTO operation (msg) VALUES (:msg)",
                 {"msg": msg})
         db.commit()
