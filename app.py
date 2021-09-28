@@ -25,7 +25,7 @@ if msgip in ipbanlist:
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    msgip = request.getenv('REMOTE_ADDR')
+    msgip = request.remote_addr
     if msgip in ipbanlist:
       realflag=True
     status=0
