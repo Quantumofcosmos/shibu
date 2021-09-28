@@ -18,9 +18,7 @@ def index():
         if "https://" in msg:
             status=2
             return render_template("index.html", status=status)
-        if "@" in msg:
-            status=2
-            return render_template("index.html", status=status)
+      
             
             
         
