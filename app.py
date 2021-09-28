@@ -20,10 +20,7 @@ def index():
 
         
         diff= keeper2 - keeper
-        if diff > 1800:
-            if count > 5:
-                count=0
-                check=False
+        
         
         
         if "https://" in msg:
@@ -32,18 +29,24 @@ def index():
         
         if "@" in msg:
                         
-            if count > 5:
+            if count >= 6:
                 if check:
-                    keeper = time.time()
-                    check=False
+                    if diff > 1800:
+                        
+                        count=0
+                        check=False
+                    
+                    
                 status=5
                 
                 return render_template("index.html", status=status)
 
             else:
                 count += 1
-                if count > 5:
+                if count == 6:
                     check=True
+                    keeper = time.time()
+                    
                 
             
       
