@@ -9,6 +9,21 @@ app = Flask(__name__)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
+ipbanlist=[]
+f=open("bannedips.csv")
+reader= csv.reader(f)
+for bip in reader:
+    
+    ipbanlist.extend(bip)
+
+@app.before_request
+def block_method()
+    msgip = request.getenv('REMOTE_ADDR')
+    if msgip in ipbanlist:
+        abort(403)
+
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     status=0
