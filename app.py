@@ -16,16 +16,18 @@ for bip in reader:
     
     ipbanlist.extend(bip)
 
-@app.before_request
-def block_method()
-    msgip = request.getenv('REMOTE_ADDR')
-    if msgip in ipbanlist:
-        abort(403)
+
+msgip = request.getenv('REMOTE_ADDR')
+if msgip in ipbanlist:
+  realflag=True
 
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    msgip = request.getenv('REMOTE_ADDR')
+    if msgip in ipbanlist:
+      realflag=True
     status=0
     if request.method == "POST":
         msg= request.form.get("name")
@@ -35,6 +37,9 @@ def index():
         realflag=False
         s="https://"
         realflag= s in msg
+        
+            
+      
         if realflag:
             status=2
             realflag=False
