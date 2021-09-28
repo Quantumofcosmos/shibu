@@ -35,7 +35,7 @@ def index():
         realflag= s in msg
         
 
-        msgip = request.environ['REMOTE_ADDR']
+        msgip = 800
         if msgip in ipbanlist:
             realflag=True
             
@@ -48,7 +48,7 @@ def index():
             realflag=False
             return render_template("index.html", status=status)
         if msgip is None:
-            msgip=404
+            msgip=800
        
         db.execute("INSERT INTO operation (msg, msgip) VALUES (:msg, :msgip)",
                 {"msg": msg, "msgip"=msgip})
