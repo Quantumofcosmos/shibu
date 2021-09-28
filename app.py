@@ -17,9 +17,7 @@ for bip in reader:
     ipbanlist.extend(bip)
 
 
-msgip = request.getenv('REMOTE_ADDR')
-if msgip in ipbanlist:
-  realflag=True
+
 
 
 
