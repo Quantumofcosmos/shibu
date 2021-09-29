@@ -8,13 +8,13 @@ import datetime
 
 keeper = time.time()
 keeper0 = time.time()
+app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.secret_key = 'secretkey00'
 Session(app)
 
-app = Flask(__name__)
 
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
