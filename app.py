@@ -15,7 +15,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.secret_key = 'secretkey00'
 Session(app)
-global mentionflag, msgflag
+
 
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
@@ -38,6 +38,7 @@ def make_session_permanent():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    global mentionflag, msgflag
     status=0
     
     
