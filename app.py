@@ -39,7 +39,7 @@ def make_session_permanent():
 @app.route("/", methods=["GET", "POST"])
 def index():
     if session.get('ip') is None:
-        session['ip'] = request.remote_addr
+        session['ip'] = request.environ['REMOTE_ADDR']
         
     global mentionflag, msgflag
     status=0
