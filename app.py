@@ -38,14 +38,15 @@ def make_session_permanent():
 @app.route("/", methods=["GET", "POST"])
 def index():
     
-     try:
+    
+    try:
+        
         if session['value'] is None:
             print(0)
             
-     except:
+    except:
+        
         session['value']=0
-    
-    
     if request.method == "POST":
         status = 0
         msg= request.form.get("name")
