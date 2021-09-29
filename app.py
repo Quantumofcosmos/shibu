@@ -21,7 +21,7 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 mentionflag=0
 msgflag=0
-ip_ban_list = ['103.224.182.212', '10.1.21.9']
+ip_ban_list = ['103.224.182.212']
 
 
 @app.before_request
@@ -32,16 +32,17 @@ def make_session_permanent():
         ip = request.remote_addr
     except:
         ip = ['999.999.999.999']
-    
+
     if ip in ip_ban_list:
         abort(403)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    session['ip'] = request.remote_addr
     global mentionflag, msgflag
     status=0
-    
-    
+
+
     if session.get('value') is None:
         session['value'] = 0
     if request.method == "POST":
@@ -50,9 +51,9 @@ def index():
         if session['value'] >= 3:
             status=6
             return render_template("index.html", status=status)
-            
+
         session['value'] += 1
-        
+
 
         if "@" in msg:
             mentionflag += 1
@@ -71,23 +72,23 @@ def index():
         if mentionflag >=5:
             status=5
             return render_template("index.html", status=status)
-            
 
-            
-        
+
+
+
         if "https://" in msg:
             status=2
             return render_template("index.html", status=status)
-      
-            
+
+
         msgflag += 1
 
         if msgflag ==15:
             keeper0 = time.time()
-            
-        
+
+
         if msgflag >= 15:
-            
+
             keeper3 = time.time()
             diff2 = keeper3 - keeper0
             if diff2 > 1800:
@@ -100,14 +101,14 @@ def index():
             return render_template("index.html", status=status)
 
 
-        
-            
-        
+
+
+
         if msg == "":
             status=2
             return render_template("index.html", status=status)
-        db.execute("INSERT INTO operation (msg) VALUES (:msg)",
-                {"msg": msg})
+        db.execute("INSERT INTO operation (msg, ip) VALUES (:msg, :ip)",
+                {"msg": msg, "ip": session['ip']})
         db.commit()
         status=1
 
