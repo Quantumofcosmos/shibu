@@ -178,8 +178,15 @@ padding:20px;
       <p>msg sent</p>
       {% endif %}
 	{% if status == 5 %}
-      <p>Quota for tagged tweets have been reached. Try again 30min </p>
+      <p>Quota for tagged tweets have been reached. Send msg without tagging or Try again 30min </p>
       {% endif %}
+	  {% if status == 6 %}
+      <p> Your quota for messages reached Try again later</p>
+      {% endif %}
+	 {% if status == 10 %}
+      <p> Quota of msgs reached. Try again after 30min</p>
+      {% endif %}
+
 	  
 
     <button class="btn">Ayacho🙃</button>
