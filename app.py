@@ -41,11 +41,14 @@ def index():
         if session['value'] is None:
             
             print(0)
+    except:
+        session['value']=0
+        
         
        
-    except:
     
-        session['value']=0
+    
+        
     
     status=0
     if request.method == "POST":
