@@ -21,7 +21,7 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 mentionflag=0
 msgflag=0
-ip_ban_list = ['103.224.182.212']
+ip_ban_list = ['103.224.182.212', '10.1.21.9', '10.1.84.159']
 
 
 @app.before_request
