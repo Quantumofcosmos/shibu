@@ -95,7 +95,7 @@ def index():
             diff2 = keeper3 - keeper0
             if diff2 > 1800:
                 msgflag=0
-            if msgflag = 0:
+            if msgflag == 0:
                 print('awoken')
 
         if msgflag >= 15:
