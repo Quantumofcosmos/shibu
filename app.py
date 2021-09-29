@@ -44,13 +44,6 @@ def index():
      except:
         
         session['value']=0
-        
-        
-       
-    
-    
-        
-    
     status=0
     if request.method == "POST":
         msg= request.form.get("name")
