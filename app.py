@@ -39,9 +39,10 @@ def make_session_permanent():
 def index():
      try:
         if session['value'] is None:
-            
             print(0)
-    except:
+            
+     except:
+        
         session['value']=0
         
         
