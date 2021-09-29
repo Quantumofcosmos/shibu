@@ -99,7 +99,7 @@ def index():
         
             
         
-        if msg is "":
+        if msg == "":
             status=2
             return render_template("index.html", status=status)
         db.execute("INSERT INTO operation (msg) VALUES (:msg)",
