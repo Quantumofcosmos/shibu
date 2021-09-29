@@ -42,8 +42,8 @@ def index():
             print(0)
             
      except:
-        
         session['value']=0
+    
     status=0
     if request.method == "POST":
         msg= request.form.get("name")
