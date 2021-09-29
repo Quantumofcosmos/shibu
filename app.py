@@ -68,7 +68,7 @@ def index():
             diff = keeper2 - keeper
             if diff > 1800:
                 mentionflag=0
-            if mentionflag = 0:
+            if mentionflag == 0:
                 print('awoken')
 
         if mentionflag >=5:
