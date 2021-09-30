@@ -41,7 +41,7 @@ def index():
     if session.get('ip') is None:
         session['ip'] = request.environ['REMOTE_ADDR']
         
-    global mentionflag, msgflag
+    global mentionflag, msgflag, keeper, keeper0
     status=0
 
 
