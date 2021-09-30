@@ -24,6 +24,17 @@ msgflag=0
 ip_ban_list = ['103.224.182.212', '10.1.90.119','10.1.82.90', '10.1.49.29', '10.1.88.135', '10.1.85.234', '10.1.82.205']
 
 
+def is_human(captcha_response):
+    """ Validating recaptcha response from google server
+        Returns True captcha test passed for submitted form else returns False.
+    """
+    secret = "6LcZl50cAAAAAKeUBrQewRR-us8e4f-bSWD6FtIU"
+    payload = {'response':captcha_response, 'secret':secret}
+    response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
+    response_text = json.loads(response.text)
+    print(response_text)
+    return response_text['success']
+
 @app.before_request
 def make_session_permanent():
     session.permanent = True
@@ -38,9 +49,12 @@ def make_session_permanent():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    sitekey = '6LcZl50cAAAAAN5vCFlUrDS4gXM_kfqwdParY4Fn'
     if session.get('ip') is None:
         session['ip'] = request.environ['REMOTE_ADDR']
-        
+    if session.get('captcha_response') is None:
+        session['captcha_response'] = ""
+
     global mentionflag, msgflag, keeper, keeper0
     status=0
 
@@ -49,10 +63,17 @@ def index():
         session['value'] = 0
     if request.method == "POST":
         status = 0
+        session['captcha_response'] = request.form['g-recaptcha-response']
         msg= request.form.get("name")
         if session['value'] >= 3:
             status=6
-            return render_template("index.html", status=status)
+            return render_template("index.html", status=status, sitekey=sitekey)
+        if is_human(session['captcha_response']):
+            print('human verified')
+        else:
+             status=99
+             return render_template("index.html", status=status, sitekey=sitekey)
+
 
         session['value'] += 1
 
@@ -73,14 +94,14 @@ def index():
 
         if mentionflag >=5:
             status=5
-            return render_template("index.html", status=status)
+            return render_template("index.html", status=status, sitekey=sitekey)
 
 
 
 
         if "https://" in msg:
             status=2
-            return render_template("index.html", status=status)
+            return render_template("index.html", status=status, sitekey=sitekey)
 
 
         msgflag += 1
@@ -100,7 +121,7 @@ def index():
 
         if msgflag >= 15:
             status=10
-            return render_template("index.html", status=status)
+            return render_template("index.html", status=status, sitekey=sitekey)
 
 
 
@@ -108,10 +129,10 @@ def index():
 
         if msg == "":
             status=2
-            return render_template("index.html", status=status)
+            return render_template("index.html", status=status, sitekey=sitekey)
         db.execute("INSERT INTO operation (msg, ip) VALUES (:msg, :ip)",
                 {"msg": msg, "ip": session['ip']})
         db.commit()
         status=1
 
-    return render_template("index.html", status=status)
+    return render_template("index.html", status=status, sitekey=sitekey)
