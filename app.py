@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from time import sleep
 from datetime import timedelta
+import requests
 
 keeper = time.time()
 keeper0 = time.time()
