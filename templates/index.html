@@ -3,11 +3,12 @@
 <head>
 <title>Shibu - The Bot</title>
 <!-- add icon link -->
-        <link rel = "icon" href = 
-"https://static.thenounproject.com/png/672931-200.png" 
+        <link rel = "icon" href =
+"https://static.thenounproject.com/png/672931-200.png"
         type = "image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <script data-ad-client="ca-pub-8110886115074683" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <style>
 body, html {
@@ -17,7 +18,7 @@ body, html {
 
 * {
   box-sizing: border-box;
-  
+
 }
 
 .bg-img {
@@ -146,13 +147,13 @@ padding:20px;
 
 
 <div class="topnav" id="myTopnav">
-	
+
   <a href="https://twitter.com/shibu_tweets" class="bot">Shibu - The Bot</a>
   <a href="https://shibuthebot.herokuapp.com/" class="active">Send Tweets</a>
-  
+
   <a href="https://shibutweets.herokuapp.com/">Send Hugs</a>
-  
-  
+
+
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
@@ -163,9 +164,9 @@ padding:20px;
 	<a href="https://twitter.com/shibu_tweets?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-show-count="false">Follow @shibu_tweets</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </center>
   </div>
-  
+
   <div class="bg-img">
-  
+
   <form action="{{ url_for('index') }}" method="post" class="container">
 
     <label for="msg"><b>So whats your anonymous message?</b></label>
@@ -186,12 +187,15 @@ padding:20px;
 	 {% if status == 10 %}
       <p> Quota of msgs reached. Try again after 30min</p>
       {% endif %}
+      {% if status == 99 %}
+         <p> Pls Complete Human Verification</p>
+         {% endif %}
 
-	  
 
+<div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div> <br/>
     <button class="btn">Ayacho🙃</button>
   </form>
-  
+
 </div>
 <script>
 function myFunction() {
@@ -211,7 +215,7 @@ function myFunction() {
 </b>
 </center>
 
-	
+
 
 
 
