@@ -104,6 +104,12 @@ def index():
             status=2
             return render_template("index.html", status=status, sitekey=sitekey)
         
+        if ".co" in msg:
+            status=2
+            return render_template("index.html", status=status, sitekey=sitekey)
+            
+        
+        
         
         if "https://" in msg:
             status=2
