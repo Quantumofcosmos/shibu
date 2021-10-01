@@ -99,10 +99,10 @@ def index():
             return render_template("index.html", status=status, sitekey=sitekey)
         
         if "steekuttan" in msg:
-            status=2
+            status=69
             return render_template("index.html", status=status, sitekey=sitekey)
         if "juixywrld" in msg:
-            status=2
+            status=69
             return render_template("index.html", status=status, sitekey=sitekey)
 
 
