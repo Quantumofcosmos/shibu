@@ -97,11 +97,15 @@ def index():
         if mentionflag >=5:
             status=5
             return render_template("index.html", status=status, sitekey=sitekey)
+        x = msg.lower()
         
-        if "steekuttan" in msg:
+        if "steekutt" in x:
             status=69
             return render_template("index.html", status=status, sitekey=sitekey)
-        if "juixywrld" in msg:
+        if "juixywrld" in x:
+            status=69
+            return render_template("index.html", status=status, sitekey=sitekey)
+        if "sreekutt" in x:
             status=69
             return render_template("index.html", status=status, sitekey=sitekey)
 
